@@ -46,18 +46,18 @@ class ProductsList {
             block.insertAdjacentHTML('beforeend', product.renderProduct());
         }
     }
-    _count() {
+    count() {
         let totalPrice = 0;
-        const totalContainer = document.querySelector('.total');
         for (let item of this.allProducts) {
              const price = item.price;
              totalPrice += price;
         }
-        totalContainer.insertAdjacentHTML('beforeend',`Товаров на сумму: ${totalPrice}`);
+        return totalPrice;
     }
 }
 
 const products = new ProductsList(); //здесь вызовется только конструктор класса, но в конце конструктор сам вызывает все методы класса
+cosole.log(products.count());
 // products.fetchProducts();
 // products.render();
 
