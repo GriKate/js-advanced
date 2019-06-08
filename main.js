@@ -122,27 +122,44 @@ class Cart {
         catalog.addEventListener('click', (event) => {
             let productId = +event.target.dataset.id;
             console.log(productId);
-            isInCart(productId);
+            this._isInCart(productId);
         }) //вешаем обработчик на <div className="products">
         //событие на кнопке - target - получаем id товара
         //передаем id в метод isInCart() корзины
     }
-    isInCart(id) {
-        for (let item of this.productsInCart) {
-            if (this.productsInCart.id_product === id) {
-                this.productsInCart.quantity++;
-            } else {
-                for (let i = 0; i < products.allProducts.length; i++) {
-                    if (products.allProducts[i].id_product === id) {
-                        const newProduct = products.allProducts[i];
-                        const newCartProduct = new CartProduct(newProduct);
-                        this.productsInCart.push(newCartProduct);
-                        this.init();
+    _isInCart(id) {
+        if (this.productsInCart.length > 0) {
+            for (let item of this.productsInCart) {
+                if (item.id_product === id) {
+                    item.quantity++;
+                } else {
+                    console.log(products.allProducts.length);
+                    for (let i = 0; i < products.allProducts.length; i++) {
+                        if (products.allProducts[i].id_product === id) {
+                            const newProduct = products.allProducts[i];
+                            console.log(newProduct);
+                            const newCartProduct = new CartProduct(newProduct);
+                            this.productsInCart.push(newCartProduct);
+                            this.init();
+                        }
                     }
                 }
-                //
             }
-        }//проверяем по id, есть ли товар в корзине (в массиве productsInCart)
+        } else {
+            console.log(products.allProducts.length);
+            for (let i = 0; i < products.allProducts.length; i++) {
+                if (products.allProducts[i].id_product === id) {
+                    const productToCart = products.allProducts[i];
+                    this._render(productToCart);
+                    //рендерим разметку товара
+                    // this.init();
+                }
+            }
+        }
+
+            //
+
+        //проверяем по id, есть ли товар в корзине (в массиве productsInCart)
         //если есть, quantity++
         //const newProduct - если нет, находим товар по id в массиве allProducts
         //создаем новый класс CartProduct
@@ -150,13 +167,15 @@ class Cart {
         //this.init();
     }
     init() {
-        this._render();
-        this._count();
+        // this._render();
+        // this._count();
     }
-    _render() {
-        for (let item of this.productsInCart) {
-            //рендерим разметку товара
-        }
+    _render(toCart) {
+        const newCartProduct = new CartProduct(toCart); //создаем новый объект товара корзины из товара каталога
+        this.productsInCart.push(newCartProduct); // в массив товаров в корзине добавляем новый товар корзины
+        const cartProductBlock = document.querySelector(this.container);
+        cartProductBlock.insertAdjacentHTML('beforeend', newCartProduct.renderCartProduct());
+        //рендерим разметку товара
         //генерируем корзину - склеиваем разметку всех товаров в container
     }
     _count() {
@@ -172,15 +191,15 @@ class CartProduct {
         this.img = product.img;
         this.quantity = 1; //количество = 1 изначально
     }
-    render() {
-        `<div id="cart-section">
-            <img src="" alt="" class="cart-img">
-                <h4 class="cart-title"></h4>
-                <p class="cart-price"></p>
-                <button class="cart-button"> X </button>
+    renderCartProduct() {
+        return`<div id="cart-section">
+                    <img src="${this.img}" alt="${this.product_name}" class="cart-img">
+                        <h4 class="cart-title">${this.product_name}</h4>
+                        <p class="cart-price">${this.price}</p>
+                        <button class="cart-button"> X </button>
 <!--                <h3 class="cart-total"></h3>-->
 <!--                <a href="#" class="cart-button-link">Перейти в корзину</a>-->
-        </div>`//разметка для товара
+                </div>`//разметка для товара
     }
 }
 
