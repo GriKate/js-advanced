@@ -1,0 +1,32 @@
+.input {
+    display: flex;
+    flex-direction: column;
+}
+input {
+    width: 300px;
+    margin-bottom: 20px;
+}
+label {
+    margin-bottom: 10px;
+}
+#message {
+    min-height: 150px;
+}
+.warning-border {
+    border: 1px solid red;
+}
+.warning-text {
+    display: none;
+    margin: 0 20px;
+    color: red;
+}
+.warning-text_visible {
+    display: block;
+}
+.wrap {
+    display: flex;
+}
+.send-btn {
+    width: 100px;
+    height: 40px;
+}
