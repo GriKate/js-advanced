@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Form</title>
+    <link rel="stylesheet" type="text/css" href="04-regexp.css">
+</head>
+<body>
+<div class="form">
+    <form action="#" method="post" class="input">
+        <label for="name">Имя</label>
+        <div class="wrap">
+            <input type="text" id="name" required autofocus>
+            <p class="warning-text warning-name">Имя содержит только буквы</p>
+        </div>
+        <label for="tel">Телефон</label>
+        <div class="wrap">
+            <input type="text" id="tel" required autofocus>
+            <p class="warning-text warning-tel">Телефон имеет вид +7(000)000-0000</p>
+        </div>
+        <label for="email">E-mail</label>
+        <div class="wrap">
+            <input type="email" id="email" required autofocus>
+            <p class="warning-text warning-email">E-mail имеет вид mymail@mail.ru</p>
+        </div>
+        <label for="message">Сообщение</label>
+        <input type="text" id="message" autofocus>
+        <button type="submit" class="send-btn">Отправить</button>
+    </form>
+    <p class="dialog">
+        One: 'Hi Mary.' Two: 'Oh, hi.'
+        One: 'How are you doing?'
+        Two: 'I'm doing alright. How about you?'
+        One: 'Not too bad. The weather is great isn't it?'
+        Two: 'Yes. It's absolutely beautiful today.'
+        One: 'I wish it was like this more frequently.'
+        Two: 'Me too.'
+        One: 'So where are you going now?'
+        Two: 'I'm going to meet a friend of mine at the department store.'
+        One: 'Going to do a little shopping?'
+        Two: 'Yeah, I have to buy some presents for my parents.'
+        One: 'What's the occasion?'
+        Two: 'It's their anniversary.'
+        One: 'That's great. Well, you better get going. You don't want to be late.'
+        Two: 'I'll see you next time.'
+        One: 'Sure. Bye.'
+    </p>
+</div>
+<script defer src="04-regexp.js"></script>
+</body>
+</html>
