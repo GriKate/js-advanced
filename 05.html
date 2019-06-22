@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Shop</title>
+    <link rel="stylesheet" type="text/css" href="normalize.css">
+    <link rel="stylesheet" type="text/css" href="01.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+</head>
+<body>
+<div id="app">
+<header>
+    <div class="header-container">
+        <p class="logo"><span>E</span>-shop</p>
+        <div class="header-right">
+            <form action="#" method="post" class="search-form" @submit.prevent="filter">
+                <input type="text" class="search-field" v-model="searchWord">
+                <button class="btn-search" type="submit">
+                    <i class="fas fa-search"></i>
+                </button>
+            </form>
+            <div class="cart-block">
+                <button class="btn-cart" type="button">Корзина</button>
+                <div class="cart">
+                    <p v-if="cart.length < 1">Корзина пуста</p>
+                    <div id="cart-section" v-for="item of cart" :key="item.id_product" data-id="item.id_product">
+                        <img :src="imgCart" class="cart-img">
+                        <div class="cart-desc">
+                            <h4 class="cart-title">{{item.product_name}}</h4>
+                            <p class="cart-quantity">Количество: {{item.quantity}}</p>
+                        </div>
+                        <div class="cart-desc">
+                            <p class="cart-price">{{item.price}}</p>
+                            <button class="cart-delete-button" @click="deleteProd(item)" data-id="item.id_product">&times;</button>
+                        </div>
+                        <!--                <h3 class="cart-total"></h3>-->
+                        <!--                <a href="#" class="cart-button-link">Перейти в корзину</a>-->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+<main>
+    <div class="products">
+        <div class="product-item" v-for="product of filtered" :key="product.id_product" data-id="product.id_product">
+            <img :src="imgCatalog">
+            <div class="item-desc">
+                <h3>{{product.product_name}}</h3>
+                <p>{{product.price}}</p>
+                <button class="buy-btn" @click="addToCart(product)" data-id="product.id_product">Купить</button>
+            </div>
+        </div>
+    </div>
+</main>
+</div>
+
+
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script defer src="05.js"></script>
+</body>
+</html>
